@@ -17,16 +17,13 @@ main {
     height: 100%;
 }
 
-h1 {
-    margin-bottom: 1rem;
-}
-
 canvas {
     width: 100%;
     height: 100%;
     border: 1px solid black;
     cursor: crosshair;
     background-color: white;
+    margin-bottom: 1rem;
 }
 
 button {
@@ -55,11 +52,47 @@ button:active {
     top: 6px;
 }
 
-.tools {
+button.action {
+    background-color: orangered;
+}
+
+input {
+    font-size: 1rem;
+    padding: 14px;
+    border-radius: 5px;
+    border: 3px solid #4d99bf;
+    box-shadow: 0 2px #336680;
+    text-transform: uppercase;
+}
+
+input::placeholder {
+    color: rgb(139, 139, 139);
+}
+
+input:focus {
+    outline: none;
+}
+
+.header {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
+
+}
+
+.settings {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.toolbar {
+    display: flex;
+    /*justify-content: space-between;*/
     gap: 0.5rem;
     max-width: 500px;
+    margin-top: 1rem;
     margin-bottom: 1rem;
 }
 
@@ -82,4 +115,19 @@ button:active {
 
 .color.black {
     background-color: black;
+}
+
+.modal {
+    padding: 1rem;
+}
+
+.word-list {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.word-list > button {
+    width: 100%;
 }
