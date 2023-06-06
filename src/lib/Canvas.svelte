@@ -26,6 +26,7 @@
     | "setWord"
     | "gameStarted"
     | "draw"
+    | "clear"
     | "guess"
     | "wordGuessed";
 
@@ -139,10 +140,14 @@
 
           prevPos = { x: pos.x, y: pos.y };
           break;
+        case "clear":
+          clearCanvas();
+          break;
         case "wordGuessed":
           open(MessagePopup, {
             message: `<span>🎉</span> ${data.name} guessed '${data.word}' correctly!`,
           });
+          inputField.value = "";
           gameStarted = false;
           break;
       }
@@ -150,6 +155,7 @@
   };
 
   socket.onclose = (event) => {
+    console.log(event);
     if (event.wasClean) {
       console.log(
         `[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`
@@ -178,7 +184,10 @@
   <button
     type="button"
     on:click={() => {
-      !gameStarted && clearCanvas();
+      if (!gameStarted) {
+        clearCanvas();
+      }
+      sendMessage("clear", null);
     }}>Clear</button
   >
 </div>
@@ -186,7 +195,7 @@
 <input
   class="guess-input"
   type="text"
-  placeholder="Guess!"
+  placeholder="Type your best guess and press ENTER!"
   bind:this={inputField}
   bind:value={wordGuess}
   on:keydown={(e) => {
