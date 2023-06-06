@@ -40,7 +40,7 @@
   let prevPos: { x?: number; y?: number } = { x: undefined, y: undefined };
   let strokeColor: Color = Color.BLACK;
 
-  let gameStarted = false;
+  let activeGame = false;
   let wordGuess = "";
 
   const sendMessage = (type: MessageType, data: any) =>
@@ -127,7 +127,7 @@
             message: "<span>🤓</span> Game started! Guess the word.",
           });
           clearCanvas();
-          gameStarted = true;
+          activeGame = true;
           break;
         case "draw":
           const { pos, prevPos: serverPrevPos, color }: DrawObject = data;
@@ -148,7 +148,7 @@
             message: `<span>🎉</span> ${data.name} guessed '${data.word}' correctly!`,
           });
           inputField.value = "";
-          gameStarted = false;
+          activeGame = false;
           break;
       }
     });
@@ -184,7 +184,7 @@
   <button
     type="button"
     on:click={() => {
-      if (!gameStarted) {
+      if (!activeGame) {
         clearCanvas();
       }
       sendMessage("clear", null);
